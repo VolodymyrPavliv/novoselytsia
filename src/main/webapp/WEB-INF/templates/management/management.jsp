@@ -5,6 +5,6 @@
     <link href="/resources/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <jsp:include page="sections/header.jsp"/>
+    <jsp:include page="../sections/header.jsp"/>
 </body>
 </html>

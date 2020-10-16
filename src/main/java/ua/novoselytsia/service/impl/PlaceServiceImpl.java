@@ -25,7 +25,7 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     @Transactional
     public List<Place> getByName(String name) {
-        if(name==null)
+        if(name.isEmpty())
             return getAll();
         return placeDAO.getByName(name);
 

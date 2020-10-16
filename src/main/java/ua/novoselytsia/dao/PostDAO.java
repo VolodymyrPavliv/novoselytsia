@@ -9,6 +9,7 @@ public interface PostDAO {
     Post getById(Long id);
     List<Post> getByTitle(String title);
     List<Post> getByUserId(Long userId);
+    List<Post> getByUserIdAndTitle(Long userId, String title);
     void delete(Post post);
     void save(Post post);
 }

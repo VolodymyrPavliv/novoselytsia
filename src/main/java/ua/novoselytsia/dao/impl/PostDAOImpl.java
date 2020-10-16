@@ -54,6 +54,15 @@ public class PostDAOImpl implements PostDAO {
     }
 
     @Override
+    public List<Post> getByUserIdAndTitle(Long userId, String title) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select p from Post p where p.user.id = :userId and p.title =:title", Post.class)
+                .setParameter("userId", userId)
+                .setParameter("title", title)
+                .list();
+    }
+
+    @Override
     public void delete(Post post) {
         Session session = sessionFactory.getCurrentSession();
         session.delete(post);

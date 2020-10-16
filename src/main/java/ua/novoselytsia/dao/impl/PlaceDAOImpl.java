@@ -30,4 +30,6 @@ public class PlaceDAOImpl implements PlaceDAO {
                 .setParameter("name",name)
                 .list();
     }
+
+
 }

@@ -15,13 +15,25 @@
         <a href="<c:url value="/profile/edit/${user.id}"/>"
            class="btn btn-info btn-sm bg-info text-white">Edit</a>
     </div>
+
+    <h1 class="text-center">Your posts
+        <c:if test="${not empty title}">
+            about ${title}
+        </c:if>
+    </h1>
+
+    <form action=""  method="get" >
+        <input type="text" name="title" placeholder="Enter title"/>
+        <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
+    </form>
+    <h4 class="text-center"><a href="/news/add" class="text-success">Add new post</a></h4>
+
     <c:choose>
     <c:when test="${empty posts}">
         <h4>There are no posts</h4>
     </c:when>
 
     <c:otherwise>
-    <h2>Your posts:</h2>
     <c:forEach items="${posts}" var="post">
         <div class="alert alert-info mt-2 bg-dark text-success">
             <h1>${post.title}</h1>

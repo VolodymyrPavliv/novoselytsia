@@ -17,9 +17,10 @@ public class PlacesController {
     }
 
     @GetMapping
-    public String showPlacesPage(Model model, @RequestParam(name = "name",required = false) String name) {
-        model.addAttribute("name",name);
+    public String showPlacesPage(Model model, @RequestParam(name = "name",defaultValue = "") String name) {
         model.addAttribute("places", placeService.getByName(name));
+        if(!name.isEmpty())
+            model.addAttribute("name",name);
         return "places";
     }
 }

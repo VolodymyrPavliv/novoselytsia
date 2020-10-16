@@ -24,9 +24,11 @@ public class NewsController {
     }
 
     @GetMapping
-    public String showNews(Model model, @RequestParam(value = "title", required = false) String title) {
-        model.addAttribute("title",title);
-        model.addAttribute("news", postService.getByTitle(title));
+    public String showNews(Model model, @RequestParam(value = "title", defaultValue = "") String title) {
+         model.addAttribute("news", postService.getByTitle(title));
+         if(!title.isEmpty()) {
+             model.addAttribute("title", title);
+         }
         return "news/news";
     }
 
@@ -44,7 +46,7 @@ public class NewsController {
         LocalDateTime dateTime = LocalDateTime.now();
         post.setPublicationDate(dateTime);
         postService.save(post);
-        return "news/news";
+        return "redirect:/news";
     }
 
 }

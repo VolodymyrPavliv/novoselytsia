@@ -11,7 +11,6 @@ import ua.novoselytsia.service.PostService;
 import ua.novoselytsia.service.UserService;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
@@ -25,13 +24,18 @@ public class ProfileController {
     }
 
     @GetMapping
-    public String showProfile(Model model) {
+    public String showProfile(Model model, @RequestParam(value = "title", defaultValue = "") String title) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         CustomerDetails customerDetails = (CustomerDetails) principal;
         User user = userService.getById(customerDetails.getUserId());
         model.addAttribute("user", user);
         model.addAttribute("userName", user.getName());
-        model.addAttribute("posts",postService.getByUserId(user.getId()));
+
+        model.addAttribute("posts",postService.getByUserIdAndTitle(user.getId(), title));
+
+        if(!title.isEmpty()) {
+            model.addAttribute("title",title);
+        }
         return "profile/profile";
     }
 

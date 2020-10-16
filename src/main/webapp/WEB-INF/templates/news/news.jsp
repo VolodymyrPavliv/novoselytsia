@@ -16,7 +16,7 @@
         </h1>
 
         <form action=""  method="get" >
-            <input type="text" name="title">
+            <input type="text" name="title" placeholder="Enter title"/>
             <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
         </form>
         <h4 class="text-center"><a href="/news/add" class="text-success">Add new post</a></h4>
@@ -31,9 +31,8 @@
                     <div class="alert alert-info mt-2 bg-dark text-success">
                         <h1>${post.title}</h1>
                         <p>${post.text}</p>
-                        <p><b>Author: </b> <i>${post.user.firstName}</i> <i>${post.user.lastName}</i> </p>
-                        <p><b>Publication date: </b> <i>${post.publicationDate}</i> <c:if test="${post.lastModified!=null}"><b>
-                            Last modified: </b> <i>${post.lastModified}</i></c:if> </p
+                        <p><b>Publication date: </b> <i>${post.publicationDate}</i>
+                            <c:if test="${post.lastModified!=null}"><b>Last modified: </b> <i>${post.lastModified}</i></c:if></p>
                     </div>
                 </c:forEach>
             </c:otherwise>

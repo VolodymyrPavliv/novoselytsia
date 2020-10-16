@@ -32,16 +32,23 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public List<Post> getByTitle(String title) {
-        if(title==null)
+        if(title.isEmpty())
             return getAll();
         return postDAO.getByTitle(title);
-
     }
 
     @Override
     @Transactional
     public List<Post> getByUserId(Long userId) {
         return postDAO.getByUserId(userId);
+    }
+
+    @Override
+    @Transactional
+    public List<Post> getByUserIdAndTitle(Long userId, String title) {
+        if(title.isEmpty())
+            return getByUserId(userId);
+        return postDAO.getByUserIdAndTitle(userId, title);
     }
 
     @Override
