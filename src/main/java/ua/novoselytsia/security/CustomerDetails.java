@@ -11,9 +11,6 @@ public class CustomerDetails implements UserDetails {
     private Long userId;
     private  Collection<? extends GrantedAuthority> authorities;
 
-    public CustomerDetails() {
-    }
-
     public CustomerDetails(String email, String password, Long userId, Collection<? extends GrantedAuthority> authorities) {
         this.email = email;
         this.password = password;

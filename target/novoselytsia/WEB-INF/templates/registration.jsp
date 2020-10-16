@@ -18,11 +18,11 @@
 <div class="container">
     <form:form action="/registration" method="post" modelAttribute="newUser" class="form-signin ">
         <h2 class="form-signin-heading">Registration</h2>
-        <form:input path="firstName" type="text" class="form-control" placeholder="Username"/>
+        <form:input path="firstName" type="text" class="form-control" placeholder="First Name"/>
         <div class="invalid-feedback d-block">
             <form:errors path="firstName" />
         </div>
-        <form:input path="lastName" type="text" class="form-control" placeholder="Username"/>
+        <form:input path="lastName" type="text" class="form-control" placeholder="Last Name"/>
         <div class="invalid-feedback d-block">
             <form:errors path="lastName" />
         </div>

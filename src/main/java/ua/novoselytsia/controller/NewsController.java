@@ -3,41 +3,48 @@ package ua.novoselytsia.controller;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.novoselytsia.entities.Post;
 import ua.novoselytsia.entities.User;
 import ua.novoselytsia.security.CustomerDetails;
 import ua.novoselytsia.service.PostService;
+import ua.novoselytsia.service.UserService;
+
+import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/news")
 public class NewsController {
-    private PostService postService;
+    private final PostService postService;
+    private final UserService userService;
 
-    public NewsController(PostService postService) {
+    public NewsController(PostService postService, UserService userService) {
         this.postService = postService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String showNews(Model model) {
-        model.addAttribute("news", postService.getAll());
-        return "news";
+    public String showNews(Model model, @RequestParam(value = "title", required = false) String title) {
+        model.addAttribute("title",title);
+        model.addAttribute("news", postService.getByTitle(title));
+        return "news/news";
     }
 
     @GetMapping("/add")
     public String newPostForm(@ModelAttribute("newPost") Post post) {
-        return "add_post";
+        return "news/add_post";
     }
 
     @PostMapping("/add")
-    public String addHotel(@ModelAttribute("post") Post post, Model model){
+    public String addPost(@ModelAttribute("newPost") Post post){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = (User) principal;
+        CustomerDetails customerDetails = (CustomerDetails) principal;
+        User user = userService.getById(customerDetails.getUserId());
         post.setUser(user);
+        LocalDateTime dateTime = LocalDateTime.now();
+        post.setPublicationDate(dateTime);
         postService.save(post);
-        return "redirect:/news";
+        return "news/news";
     }
+
 }

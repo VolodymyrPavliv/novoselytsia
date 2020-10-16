@@ -51,6 +51,17 @@ public class User {
     public User() {
     }
 
+
+    public User(String email, String firstName, String lastName, int age, String password, List<Role> roles, List<Post> news) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.password = password;
+        this.roles = roles;
+        this.news = news;
+    }
+
     public Long getId() {
         return id;
     }
@@ -105,5 +116,17 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Post> getNews() {
+        return news;
+    }
+
+    public void setNews(List<Post> news) {
+        this.news = news;
+    }
+
+    public String getName() {
+        return firstName +" "+ lastName;
     }
 }

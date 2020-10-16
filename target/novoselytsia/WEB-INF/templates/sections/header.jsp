@@ -9,7 +9,13 @@
         <a class="p-2 text-success" href="<c:url value="/news"/>">News</a>
         <a class="p-2 text-success" href="<c:url value="/places"/>">Places</a>
         <a class="p-2 text-success" href="<c:url value="/history"/>">History</a>
+        <a class="p-2 text-success" href="<c:url value="/profile"/>">Profile</a>
         <a class="p-2 text-success" href="<c:url value="/about"/>">About us</a>
         <a class="p-2 text-success" href="<c:url value="/logout"/>">Logout</a>
     </nav>
+    <style>
+        body {
+            backgroung: #c7b39b;
+        }
+    </style>
 </div>

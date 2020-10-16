@@ -26,10 +26,19 @@ create table if not exists `user_roles` (
 
 create table if not exists `news` (
   `id` int primary key auto_increment,
-  `user_id` int not null,
+  `user_id` int,
   `title` varchar(100) not null,
   `text` varchar(550) not null,
+  `publication_date` datetime not null,
+  `last_modified` datetime,
   foreign key (user_id)
     references users(`id`)
         on update restrict on delete cascade
+);
+
+create table if not exists `places` (
+    `id` int primary key auto_increment,
+    `name` varchar(100) not null,
+    `description` varchar(550),
+    `location` varchar(100)
 );

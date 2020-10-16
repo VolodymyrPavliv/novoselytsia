@@ -26,9 +26,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void save(User user) {
-        encodeUsersPassword(user);
-        user.setRoles(new ArrayList<>());
-        user.getRoles().add(roleService.getByName("CUSTOMER"));
+        if(user.getRoles().isEmpty()) {
+            encodeUsersPassword(user);
+            user.setRoles(new ArrayList<>());
+            user.getRoles().add(roleService.getByName("CUSTOMER"));
+        }
         userDAO.save(user);
     }
 

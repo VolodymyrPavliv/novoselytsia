@@ -1,6 +1,7 @@
 package ua.novoselytsia.entities;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news")
@@ -16,7 +17,13 @@ public class Post {
     @Column(name = "text")
     private String text;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "publication_date")
+    private LocalDateTime publicationDate;
+
+    @Column(name = "last_modified")
+    private LocalDateTime lastModified;
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
             referencedColumnName = "id",
             nullable = false)
@@ -25,9 +32,11 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title, String text, User user) {
+    public Post(String title, String text, LocalDateTime publicationDate, LocalDateTime lastModified, User user) {
         this.title = title;
         this.text = text;
+        this.publicationDate = publicationDate;
+        this.lastModified = lastModified;
         this.user = user;
     }
 
@@ -61,5 +70,21 @@ public class Post {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public LocalDateTime getPublicationDate() {
+        return publicationDate;
+    }
+
+    public void setPublicationDate(LocalDateTime publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    public LocalDateTime getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(LocalDateTime lastModified) {
+        this.lastModified = lastModified;
     }
 }
