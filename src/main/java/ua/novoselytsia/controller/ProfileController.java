@@ -24,18 +24,12 @@ public class ProfileController {
     }
 
     @GetMapping
-    public String showProfile(Model model, @RequestParam(value = "title", defaultValue = "") String title) {
+    public String showProfile(Model model) {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         CustomerDetails customerDetails = (CustomerDetails) principal;
         User user = userService.getById(customerDetails.getUserId());
         model.addAttribute("user", user);
         model.addAttribute("userName", user.getName());
-
-        model.addAttribute("posts",postService.getByUserIdAndTitle(user.getId(), title));
-
-        if(!title.isEmpty()) {
-            model.addAttribute("title",title);
-        }
         return "profile/profile";
     }
 
@@ -67,13 +61,30 @@ public class ProfileController {
         return "redirect:/profile";
     }
 
-    @GetMapping("/post/delete/{id}")
-    public String deletePost(@PathVariable Long id) {
-        postService.delete(postService.getById(id));
-        return "redirect:/profile";
+    @GetMapping("/news/{id}")
+    public String showPosts(Model model, @PathVariable Long id,
+                            @RequestParam(value = "title",defaultValue = "") String title) {
+        model.addAttribute("posts",postService.getByUserIdAndTitle(id, title));
+        if(!title.isEmpty()) {
+            model.addAttribute("title", title);
+        }
+        return "profile/news";
     }
 
-    @GetMapping("/post/edit/{id}")
+    @GetMapping("/news/delete/{id}")
+    public String deletePost(@PathVariable Long id) {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomerDetails customerDetails = (CustomerDetails) principal;
+        User currentUser = userService.getById(customerDetails.getUserId());
+        Post post = postService.getById(id);
+        if(post.getUser() == currentUser || currentUser.getRoles().stream()
+                .anyMatch(role -> role.getName().equals("MANAGER"))) {
+            postService.delete(post);
+        }
+        return "redirect:/profile/news/"+currentUser.getId();
+    }
+
+    @GetMapping("/news/edit/{id}")
     public String editPostForm(@PathVariable Long id, Model model) {
         Post post = postService.getById(id);
         model.addAttribute("post", post);
@@ -81,7 +92,7 @@ public class ProfileController {
         return "/profile/edit_post";
     }
 
-    @PostMapping("/post/edit/{id}")
+    @PostMapping("/news/edit/{id}")
     public String editPost(@RequestParam(value = "title") String title, @RequestParam(value = "text")String text,
                            Model model, @PathVariable Long id) {
         Post post = postService.getById(id);
@@ -97,7 +108,6 @@ public class ProfileController {
                 .anyMatch(role -> role.getName().equals("MANAGER"))) {
             postService.save(post);
         }
-        return "redirect:/profile";
+        return "redirect:/profile/news/"+currentUser.getId();
     }
-
 }

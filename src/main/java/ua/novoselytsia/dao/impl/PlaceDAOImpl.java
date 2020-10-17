@@ -31,5 +31,23 @@ public class PlaceDAOImpl implements PlaceDAO {
                 .list();
     }
 
+    @Override
+    public Place getById(Long id) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select p from Place p where p.id = :id",Place.class)
+                .setParameter("id",id)
+                .uniqueResult();
+    }
 
+    @Override
+    public void delete(Place place) {
+        Session session = sessionFactory.getCurrentSession();
+        session.delete(place);
+    }
+
+    @Override
+    public void save(Place place) {
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(place);
+    }
 }

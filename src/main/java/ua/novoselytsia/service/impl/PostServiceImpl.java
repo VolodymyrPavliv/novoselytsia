@@ -66,12 +66,6 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void delete(Post post) {
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        CustomerDetails customerDetails = (CustomerDetails) principal;
-        User currentUser = userService.getById(customerDetails.getUserId());
-        if(post.getUser() == currentUser || currentUser.getRoles().stream()
-        .anyMatch(role -> role.getName().equals("MANAGER"))) {
             postDAO.delete(post);
-        }
     }
 }

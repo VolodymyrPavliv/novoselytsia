@@ -9,7 +9,10 @@ import ua.novoselytsia.service.RoleService;
 import ua.novoselytsia.service.UserService;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -26,11 +29,15 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void save(User user) {
-        if(user.getRoles().isEmpty()) {
-            encodeUsersPassword(user);
-            user.setRoles(new ArrayList<>());
-            user.getRoles().add(roleService.getByName("CUSTOMER"));
-        }
+        userDAO.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void register(User user) {
+        encodeUsersPassword(user);
+        user.setRoles(new ArrayList<>());
+        user.getRoles().add(roleService.getByName("CUSTOMER"));
         userDAO.save(user);
     }
 
@@ -56,6 +63,28 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void delete(Long id) {
         userDAO.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void changeRole(User user) {
+        if(user.getRoles().stream().anyMatch(r-> r.getName().equals("MANAGER"))) {
+            user.getRoles().clear();
+            user.getRoles().add(roleService.getByName("CUSTOMER"));
+        }else {
+            user.getRoles().clear();
+            user.getRoles().add(roleService.getByName("MANAGER"));
+        }
+        userDAO.save(user);
+    }
+
+    @Override
+    @Transactional
+    public List<User> getByLastName(String lastName) {
+        if(lastName.isEmpty()) {
+            return getAll();
+        }
+        return userDAO.getByLastName(lastName);
     }
 
     private void encodeUsersPassword(User user) {

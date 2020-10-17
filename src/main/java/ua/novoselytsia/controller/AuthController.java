@@ -45,7 +45,7 @@ public class AuthController {
         if (errors.hasErrors()) {
             return "registration";
         }
-        userService.save(user);
+        userService.register(user);
         return "redirect:/login";
     }
 

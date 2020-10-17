@@ -30,4 +30,22 @@ public class PlaceServiceImpl implements PlaceService {
         return placeDAO.getByName(name);
 
     }
+
+    @Override
+    @Transactional
+    public Place getById(Long id) {
+        return placeDAO.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Place place) {
+        placeDAO.delete(place);
+    }
+
+    @Override
+    @Transactional
+    public void save(Place place) {
+        placeDAO.save(place);
+    }
 }

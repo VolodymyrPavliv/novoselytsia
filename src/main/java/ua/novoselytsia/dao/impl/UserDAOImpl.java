@@ -48,6 +48,22 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> getByFirstName(String firstName) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select u from User u where u.firstName = :firstName", User.class)
+                .setParameter("firstName",firstName)
+                .list();
+    }
+
+    @Override
+    public List<User> getByLastName(String lastName) {
+        Session session = sessionFactory.getCurrentSession();
+        return session.createQuery("select u from User u where u.lastName = :lastName", User.class)
+                .setParameter("lastName",lastName)
+                .list();
+    }
+
+    @Override
     public void delete(Long id) {
         Session session = sessionFactory.getCurrentSession();
         session.createQuery("delete from User u where u.id = :id")

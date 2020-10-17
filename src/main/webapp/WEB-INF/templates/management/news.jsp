@@ -34,9 +34,9 @@
                     <p><b>Author: </b> <i>${post.user.firstName}</i> <i>${post.user.lastName}</i> </p>
                     <p><b>Publication date: </b> <i>${post.publicationDate}</i> <c:if test="${post.lastModified!=null}"><b>
                         Last modified: </b> <i>${post.lastModified}</i></c:if> </p>
-                    <a href="<c:url value="/management/post/edit/${post.id}"/>"
+                    <a href="<c:url value="/management/news/edit/${post.id}"/>"
                        class="btn btn-info btn-sm bg-info text-white">Edit</a>
-                    <a href="<c:url value="/management/post/delete/${post.id}"/>"
+                    <a href="<c:url value="/management/news/delete/${post.id}"/>"
                        class="btn btn-danger btn-sm">Delete</a>
                 </div>
             </c:forEach>
