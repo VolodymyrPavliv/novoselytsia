@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Adding post</title>
+    <title>Adding place</title>
     <link href="/resources/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,6 +14,9 @@
     <form:form action="/management/places/add" method="post" modelAttribute="newPlace">
         <label for="placeName" class="form-label"><b>Name: </b></label>
         <form:input path="name" class="form-control" id = "placeName" placeholder="Enter title"/>
+        <div class="invalid-feedback d-block">
+            <form:errors path="name" />
+        </div>
 
         <label for="placeDescription" class="form-label"><b>Description: </b></label>
         <form:textarea path="description" class="form-control" id = "placeDescription" placeholder="Enter text"/>

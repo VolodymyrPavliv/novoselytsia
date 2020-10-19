@@ -14,9 +14,16 @@
     <form:form action="/news/add" method="post" modelAttribute="newPost">
         <label for="title" class="form-label"><b>Title: </b></label>
         <form:input path="title" type="text" class="form-control" id = "title" placeholder="Enter title"/>
+        <div class="invalid-feedback d-block">
+            <form:errors path="title" />
+        </div>
 
         <label for="title" class="form-label"><b>Text: </b></label>
         <form:textarea path="text" class="form-control" id = "text" placeholder="Enter text"/>
+        <div class="invalid-feedback d-block">
+            <form:errors path="text" />
+        </div>
+
         <br>
         <button class="btn btn-success bg-dark text-success" type="submit">Add post</button>
     </form:form>

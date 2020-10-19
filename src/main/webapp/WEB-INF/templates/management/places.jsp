@@ -15,7 +15,7 @@
     </h1>
 
     <form action=""  method="get" >
-        <input type="text" name="name">
+        <input type="text" name="name" placeholder="Enter name">
         <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
     </form>
     <h4 class="text-center"><a href="/management/places/add" class="text-success">Add new place</a></h4>

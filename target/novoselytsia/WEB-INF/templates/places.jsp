@@ -15,7 +15,7 @@
         </h1>
 
         <form action=""  method="get" >
-            <input type="text" name="name">
+            <input type="text" name="name" placeholder="Enter name">
             <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
         </form>
 

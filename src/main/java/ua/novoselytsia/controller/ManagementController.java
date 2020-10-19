@@ -2,11 +2,15 @@ package ua.novoselytsia.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ua.novoselytsia.entities.Place;
 import ua.novoselytsia.entities.Post;
 import ua.novoselytsia.service.PlaceService;
 import ua.novoselytsia.service.PostService;
+import ua.novoselytsia.validation.PlaceValidator;
+import ua.novoselytsia.validation.PostValidator;
 
 import java.time.LocalDateTime;
 
@@ -15,10 +19,14 @@ import java.time.LocalDateTime;
 public class ManagementController {
     private final PostService postService;
     private final PlaceService placeService;
+    private final PlaceValidator placeValidator;
+    private final PostValidator postValidator;
 
-    public ManagementController(PostService postService, PlaceService placeService) {
+    public ManagementController(PostService postService, PlaceService placeService, PlaceValidator placeValidator, PostValidator postValidator) {
         this.postService = postService;
         this.placeService = placeService;
+        this.placeValidator = placeValidator;
+        this.postValidator = postValidator;
     }
 
     @GetMapping
@@ -42,19 +50,27 @@ public class ManagementController {
     }
 
     @GetMapping("/news/edit/{id}")
-    public String editPostForm(@PathVariable Long id, Model model) {
+    public String editPostForm(@PathVariable Long id, Model model, @ModelAttribute("newPost") Post newPost) {
         Post post = postService.getById(id);
+
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle());
-        return "/management/edit_post";
+        return "management/edit_post";
     }
 
     @PostMapping("/news/edit/{id}")
-    public String editPost(@RequestParam(value = "title") String title, @RequestParam(value = "text")String text,
-                           Model model, @PathVariable Long id) {
+    public String editPost(@ModelAttribute("newPost") Post newPost,
+                           Errors errors, Model model, @PathVariable Long id) {
+
         Post post = postService.getById(id);
-        post.setTitle(title);
-        post.setText(text);
+        post.setTitle(newPost.getTitle());
+        post.setText(newPost.getText());
+
+        postValidator.validate(post, errors);
+        if(errors.hasErrors()) {
+            model.addAttribute("post",post);
+            return "management/edit_post";
+        }
         post.setLastModified(LocalDateTime.now());
 
         postService.save(post);
@@ -76,7 +92,11 @@ public class ManagementController {
     }
 
     @PostMapping("/places/add")
-    public String addPlace(@ModelAttribute("newPlace") Place place) {
+    public String addPlace(@ModelAttribute("newPlace") Place place, Errors errors) {
+        placeValidator.validate(place, errors);
+        if(errors.hasErrors()) {
+            return "management/add_place";
+        }
         placeService.save(place);
         return "redirect:/management/places";
     }
@@ -92,11 +112,17 @@ public class ManagementController {
         Place place = placeService.getById(id);
         model.addAttribute("place", place);
         model.addAttribute("name", place.getName());
-        return "/management/edit_place";
+
+        return "management/edit_place";
     }
 
     @PostMapping("/places/edit/{id}")
-    public String editPlace(@ModelAttribute("place") Place place) {
+    public String editPlace(@ModelAttribute("place") Place place, Errors errors) {
+        placeValidator.validate(place, errors);
+        if(errors.hasErrors()) {
+            return "management/edit_place";
+        }
+
         placeService.save(place);
         return "redirect:/management/places";
     }

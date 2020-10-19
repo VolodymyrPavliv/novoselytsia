@@ -9,18 +9,18 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.novoselytsia.entities.User;
 import ua.novoselytsia.service.UserService;
-import ua.novoselytsia.validation.UserValidator;
+import ua.novoselytsia.validation.AuthValidator;
 
 @Controller
 public class AuthController {
     private final Environment environment;
     private final UserService userService;
-    private final UserValidator userValidator;
+    private final AuthValidator authValidator;
 
-    public AuthController(Environment environment, UserService userService, UserValidator userValidator) {
+    public AuthController(Environment environment, UserService userService, AuthValidator authValidator) {
         this.environment = environment;
         this.userService = userService;
-        this.userValidator = userValidator;
+        this.authValidator = authValidator;
     }
 
     @GetMapping("/login")
@@ -41,7 +41,7 @@ public class AuthController {
 
     @PostMapping("/registration")
     public String registration(@ModelAttribute("newUser") User user, Errors errors) {
-        userValidator.validate(user, errors);
+        authValidator.validate(user, errors);
         if (errors.hasErrors()) {
             return "registration";
         }

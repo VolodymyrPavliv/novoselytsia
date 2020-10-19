@@ -7,17 +7,26 @@
 <body>
 <jsp:include page="../sections/header.jsp"/>
 <div class="container">
-    <form action="" method="post" class="form-signin ">
+    <form:form method="post" modelAttribute="newUser" class="form-signin ">
         <h2 class="form-signin-heading">Edit profile</h2>
         <lable id="firstName"><b>First Name: </b></lable>
         <input name="firstName" id="firstName" type="text" value="${user.firstName}" class="form-control" />
+        <div class="invalid-feedback d-block">
+            <form:errors path="firstName" />
+        </div>
         <lable id="lastName"><b>Last Name: </b></lable>
         <input name="lastName" id = "lastName" type="text" value="${user.lastName}" class="form-control" />
+        <div class="invalid-feedback d-block">
+            <form:errors path="lastName" />
+        </div>
         <lable id="age"><b>Age: </b></lable>
         <input name="age" id = "age" type="text" value="${user.age}" class="form-control"/>
+        <div class="invalid-feedback d-block">
+            <form:errors path="age" />
+        </div>
         <br>
         <button class="btn btn-success bg-dark text-success" type="submit">Submit changes</button>
-    </form>
+    </form:form>
 </div>
 </body>
 </html>

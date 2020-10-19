@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Management News</title>
+    <title>Users</title>
     <link href="/resources/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <h1 class="text-center">User List</h1>
 
     <form action=""  method="get" >
-        <input type="text" name="lastName" placeholder="Enter lastName"/>
+        <input type="text" name="lastName" placeholder="Enter last name"/>
         <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
     </form>
 

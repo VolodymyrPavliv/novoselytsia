@@ -3,12 +3,15 @@ package ua.novoselytsia.controller;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import ua.novoselytsia.entities.Post;
 import ua.novoselytsia.entities.User;
 import ua.novoselytsia.security.CustomerDetails;
 import ua.novoselytsia.service.PostService;
 import ua.novoselytsia.service.UserService;
+import ua.novoselytsia.validation.PostValidator;
+import ua.novoselytsia.validation.UserValidator;
 
 import java.time.LocalDateTime;
 
@@ -17,10 +20,14 @@ import java.time.LocalDateTime;
 public class ProfileController {
     private final UserService userService;
     private final PostService postService;
+    private final PostValidator postValidator;
+    private final UserValidator userValidator;
 
-    public ProfileController(UserService userService, PostService postService) {
+    public ProfileController(UserService userService, PostService postService, PostValidator postValidator, UserValidator userValidator) {
         this.userService = userService;
         this.postService = postService;
+        this.postValidator = postValidator;
+        this.userValidator = userValidator;
     }
 
     @GetMapping
@@ -34,31 +41,36 @@ public class ProfileController {
     }
 
     @GetMapping("/edit/{id}")
-    public String profileEditForm(@PathVariable Long id,Model model) {
+    public String profileEditForm(@PathVariable Long id,Model model, @ModelAttribute("newUser") User newUser) {
         User user = userService.getById(id);
         model.addAttribute("user", user);
-        return "/profile/edit_profile";
+        return "profile/edit_profile";
     }
 
     @PostMapping("/edit/{id}")
-    public String profileEdit(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName,
-                              @RequestParam("age") int age, @PathVariable Long id,
+    public String profileEdit(@ModelAttribute("newUser") User newUser, Errors errors, @PathVariable Long id,
                               Model model) {
         User user = userService.getById(id);
-        model.addAttribute("user", user);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        user.setAge(age);
 
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        CustomerDetails customerDetails = (CustomerDetails) principal;
-        User currentUser = userService.getById(customerDetails.getUserId());
+        user.setFirstName(newUser.getFirstName());
+        user.setLastName(newUser.getLastName());
+        user.setAge(newUser.getAge());
 
-        if(user==currentUser || currentUser.getRoles().stream()
-                .anyMatch(role -> role.getName().equals("MANAGER"))) {
-            userService.save(user);
+        userValidator.validate(user, errors);
+        if(errors.hasErrors()) {
+            model.addAttribute("user", user);
+            return "profile/edit_profile";
         }
-        return "redirect:/profile";
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            CustomerDetails customerDetails = (CustomerDetails) principal;
+            User currentUser = userService.getById(customerDetails.getUserId());
+
+            if (user == currentUser || currentUser.getRoles().stream()
+                    .anyMatch(role -> role.getName().equals("MANAGER"))) {
+                userService.save(user);
+            }
+            return "redirect:/profile";
+
     }
 
     @GetMapping("/news/{id}")
@@ -85,7 +97,7 @@ public class ProfileController {
     }
 
     @GetMapping("/news/edit/{id}")
-    public String editPostForm(@PathVariable Long id, Model model) {
+    public String editPostForm(@PathVariable Long id, Model model, @ModelAttribute("newPost") Post newPost) {
         Post post = postService.getById(id);
         model.addAttribute("post", post);
         model.addAttribute("title", post.getTitle());
@@ -93,11 +105,18 @@ public class ProfileController {
     }
 
     @PostMapping("/news/edit/{id}")
-    public String editPost(@RequestParam(value = "title") String title, @RequestParam(value = "text")String text,
+    public String editPost(@ModelAttribute("newPost") Post newPost, Errors errors,
                            Model model, @PathVariable Long id) {
         Post post = postService.getById(id);
-        post.setTitle(title);
-        post.setText(text);
+        post.setTitle(newPost.getTitle());
+        post.setText(newPost.getText());
+
+        postValidator.validate(post, errors);
+        if(errors.hasErrors()) {
+            model.addAttribute("post",post);
+            return "management/edit_post";
+        }
+
         post.setLastModified(LocalDateTime.now());
 
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

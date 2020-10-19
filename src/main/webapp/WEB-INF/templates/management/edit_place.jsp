@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Edit post</title>
+    <title>Edit place</title>
     <link href="/resources/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
@@ -14,6 +14,9 @@
         <hidden path="id" />
         <label for="placeName" class="form-label"><b>Name:</b></label>
         <input name="name" type="text" class="form-control" id="placeName" value="${place.name}"/>
+        <div class="invalid-feedback d-block">
+            <form:errors path="name" />
+        </div>
         <label for="placeDescription" class="form-label"><b>Description</b></label>
         <textarea name="description"  class="form-control" id="placeDescription" rows="3">${place.description}</textarea>
         <label for="placeLocation" class="form-label"><b>Location:</b></label>
