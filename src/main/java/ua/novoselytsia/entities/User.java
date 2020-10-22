@@ -129,4 +129,9 @@ public class User {
     public String getName() {
         return firstName +" "+ lastName;
     }
+
+    @Override
+    public String toString() {
+        return firstName + " " +lastName;
+    }
 }
