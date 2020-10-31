@@ -1,16 +1,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Novoselytsia</title>
+    <title>Новоселиця</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,34 +44,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
                 <li>
-                    <a href="<c:url value="/management"/>">Management</a>
+                    <a href="<c:url value="/management"/>">Менеджмент</a>
                 </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -86,9 +90,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Novoselytsia</h1>
+                    <h1>Новоселиця</h1>
                     <hr class="small">
-                    <span class="subheading">Ukraine | Ivano-Frankivsk region | Dolyna district</span>
+                    <span class="subheading">Україна | Івано-Франківська область | Калуський район</span>
                 </div>
             </div>
         </div>
@@ -102,10 +106,10 @@
             <div class="post-preview">
                 <a href="/news">
                     <h2 class="post-title">
-                        Novoselytsia news
+                        Новини новоселиці
                     </h2>
                     <h3 class="post-subtitle">
-                        Here you can find out the latest news and publish your own.
+                        Тут ви можете дізнатися останні новини та додати свої власні.
                     </h3>
                 </a>
             </div>
@@ -113,10 +117,10 @@
             <div class="post-preview">
                 <a href="/places">
                     <h2 class="post-title">
-                        Novoselytsia places
+                        Місця Новоселиці
                     </h2>
                 <h3 class="post-subtitle">
-                    Here you can find out about interesting places in Novoselytsia.
+                    Тут ви можете дізнатися про цікаві місця в Новоселиці.
                 </h3>
                 </a>
             </div>
@@ -124,10 +128,10 @@
             <div class="post-preview">
                 <a href="/history">
                     <h2 class="post-title">
-                        Novoselytsia history
+                        Історія Новоселиці
                     </h2>
                     <h3 class="post-subtitle">
-                        Here you can read the history of Novoselytsia.
+                        Тут ви можете прочитати історію Новоселиці.
                     </h3>
                 </a>
             </div>
@@ -168,7 +172,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy;  2020</p>
             </div>
         </div>
     </div>

@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -35,45 +37,47 @@
 
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
-        </div>
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header page-scroll">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            Menu <i class="fa fa-bars"></i>
+        </button>
+        <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
+    </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="<c:url value="/"/>">Головна</a>
+            </li>
+            <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/management"/>">Менеджмент</a>
                 </li>
-                <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
-                    <li>
-                        <a href="<c:url value="/management"/>">Management</a>
-                    </li>
-                </c:if>
-                <li>
-                    <a href="<c:url value="/news"/>">News</a>
-                </li>
-                <li>
-                    <a href="<c:url value="/places"/>">Places</a>
-                </li>
-                <li>
-                    <a href="<c:url value="/history"/>">History</a>
-                </li>
-                <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
-                </li>
-                <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+            </c:if>
+            <li>
+                <a href="<c:url value="/news"/>">Новини</a>
+            </li>
+            <li>
+                <a href="<c:url value="/places"/>">Місця</a>
+            </li>
+            <li>
+                <a href="<c:url value="/history"/>">Історія</a>
+            </li>
+            <li>
+                <a href="<c:url value="/profile"/>">Профіль</a>
+            </li>
+            <li>
+                <a href="<c:url value="/contact"/>">Контакти</a>
+            </li>
+            <li>
+                <a href="<c:url value="/logout"/>">Вихід</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
     </div>
     <!-- /.container -->
 </nav>
@@ -103,14 +107,14 @@
                     ${userName}
                 </h2>
                 <p class="post-meta">${user.email}</p>
-                <p><b>Age: </b>${user.age}</p>
+                <p><b>Вік: </b>${user.age}</p>
                 <c:forEach items="${user.roles}" var="role">
-                    <p><b>Role: </b>${role.name}</p>
+                    <p><b>Статус: </b>${role.name}</p>
                 </c:forEach>
                 <a href="<c:url value="/profile/news/${user.id}"/>"
-                   class="btn btn-info btn-sm bg-info text-white">Posts</a>
+                   class="btn btn-info btn-sm bg-info text-white">Пости</a>
                 <a href="<c:url value="/profile/edit/${user.id}"/>"
-                   class="btn btn-info btn-sm bg-info text-white">Edit</a>
+                   class="btn btn-info btn-sm bg-info text-white">Редагувати</a>
             </div>
         </div>
     </div>
@@ -148,7 +152,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

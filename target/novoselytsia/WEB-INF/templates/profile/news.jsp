@@ -1,6 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -9,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Your posts</title>
+    <title>Пости</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -42,34 +45,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
                     <li>
-                        <a href="<c:url value="/management"/>">Management</a>
+                        <a href="<c:url value="/management"/>">Менеджмент</a>
                     </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -87,9 +93,9 @@
                 <div class="site-heading">
                     <h1>Posts</h1>
                     <hr class="small">
-                    <span class="subheading">Posts
+                    <span class="subheading">Пости
                         <c:if test="${not empty title}">
-                            about ${title}
+                            про ${title}
                         </c:if>
                     </span>
                 </div>
@@ -102,16 +108,16 @@
 
 <div class="container">
     <form action=""  method="get" >
-        <input type="text" name="title" placeholder="Enter title"/>
-        <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
+        <input type="text" name="title" placeholder="Введіть назву"/>
+        <button class="btn btn-success bg-dark text-success" type="submit">Знайти</button>
     </form>
-    <h4 class="text-center"><a href="/news/add" class="text-success">Add new post</a></h4>
+    <h4 class="text-center"><a href="/news/add" class="text-success">Додати новий пост</a></h4>
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <c:choose>
                 <c:when test="${empty posts}">
-                    <h4>There are no posts</h4>
+                    <h4>Немає постів</h4>
                 </c:when>
 
                 <c:otherwise>
@@ -124,14 +130,14 @@
                             <p>
                                     ${post.text}
                             </p>
-                            <p class="post-meta">Posted by ${post.user} on ${post.publicationDate}</p>
+                            <p class="post-meta">Опубліковано: ${post.user} | ${post.publicationDate}</p>
                             <c:if test="${post.lastModified!=null}">
-                                <p class="post-meta">Lasted modified on ${post.lastModified}</p>
+                                <p class="post-meta">Останні зміни: ${post.lastModified}</p>
                             </c:if>
                             <a href="<c:url value="/profile/news/edit/${post.id}"/>"
-                               class="btn btn-info btn-sm bg-info text-white">Edit</a>
+                               class="btn btn-info btn-sm bg-info text-white">Редагувати</a>
                             <a href="<c:url value="/profile/news/delete/${post.id}"/>"
-                               class="btn btn-danger btn-sm">Delete</a>
+                               class="btn btn-danger btn-sm">Видалити</a>
 
                         </div>
                     </c:forEach>
@@ -173,7 +179,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

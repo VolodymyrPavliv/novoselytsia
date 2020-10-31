@@ -36,6 +36,7 @@ public class WebConfig implements WebMvcConfigurer {
         viewResolver.setPrefix("/WEB-INF/templates/");
         viewResolver.setSuffix(".jsp");
         viewResolver.setViewClass(JstlView.class);
+        viewResolver.setContentType("text/html; charset = UTF-8");
         viewResolver.setApplicationContext(applicationContext);
         return viewResolver;
     }

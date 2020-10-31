@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -10,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Management page</title>
+    <title>Менеджмент</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,34 +45,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
-                <li>
-                    <a href="<c:url value="/management"/>">Management</a>
-                </li>
+                    <li>
+                        <a href="<c:url value="/management"/>">Менеджмент</a>
+                    </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -86,9 +91,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Management page</h1>
+                    <h1>Менеджмент</h1>
                     <hr class="small">
-                    <span class="subheading">This page is for admin</span>
+                    <span class="subheading">Ця сторінка для менеджера</span>
                 </div>
             </div>
         </div>
@@ -102,10 +107,10 @@
             <div class="post-preview">
                 <a href="/management/news">
                     <h2 class="post-title">
-                        Management posts
+                        Управління постами
                     </h2>
                     <h3 class="post-subtitle">
-                        Here you can manage the posts of other users and your own.
+                        Тут ви можете управляти постами інших користувачів та своїми.
                     </h3>
                 </a>
             </div>
@@ -113,10 +118,10 @@
             <div class="post-preview">
                 <a href="/management/places">
                     <h2 class="post-title">
-                        Management places
+                        Управління місцями
                     </h2>
                     <h3 class="post-subtitle">
-                        Here you can mange the places and add new ones.
+                        Тут ви можете управляти місцями та додавати нові.
                     </h3>
                 </a>
             </div>
@@ -124,10 +129,10 @@
             <div class="post-preview">
                 <a href="/management/users">
                     <h2 class="post-title">
-                        Management user list
+                        Управління даними користувачів
                     </h2>
                     <h3 class="post-subtitle">
-                        Here you can view the list of users, your profile, give manager status to other users, remove this status and delete user profiles.
+                        Тут ви можете переглянути список користувачів, управляти своїм профілем, надавати статус менеджера іншим користувачам та видаляти профілі користувачів.
                     </h3>
                 </a>
             </div>
@@ -168,7 +173,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

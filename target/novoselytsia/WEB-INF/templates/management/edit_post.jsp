@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Editing post</title>
+    <title>Редагування поста</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -40,34 +42,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
                     <li>
-                        <a href="<c:url value="/management"/>">Management</a>
+                        <a href="<c:url value="/management"/>">Менеджмент</a>
                     </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -83,10 +88,10 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Editing post</h1>
+                    <h1>Редагування поста</h1>
                     <hr class="small">
                     <span class="subheading">
-                        Edit post about ${title}
+                        Редагування поста про ${title}
                     </span>
                 </div>
             </div>
@@ -100,18 +105,18 @@
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
     <form:form method="post" modelAttribute="newPost">
         <hidden path="id" />
-        <label for="postTitle" class="form-label"><b>Title: </b></label>
+        <label for="postTitle" class="form-label"><b>Заголовок: </b></label>
         <input name="title" type="text" class="form-control" id="postTitle" value="${post.title}"/>
         <div class="invalid-feedback d-block">
             <form:errors path="title" />
         </div>
-        <label for="postText" class="form-label"><b>Text: </b></label>
+        <label for="postText" class="form-label"><b>Текст: </b></label>
         <textarea name="text"  class="form-control" id="postText" rows="3">${post.text}</textarea>
         <div class="invalid-feedback d-block">
             <form:errors path="text" />
         </div>
         <br>
-        <button class="btn btn-success bg-dark text-success" type="submit">Submit changes</button>
+        <button class="btn btn-success bg-dark text-success" type="submit">Зберегти зміни</button>
     </form:form>
 </div>
     </div>
@@ -149,7 +154,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit profile</title>
+    <title>Редагування профелю</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -41,34 +43,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
                     <li>
-                        <a href="<c:url value="/management"/>">Management</a>
+                        <a href="<c:url value="/management"/>">Менеджмент</a>
                     </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -84,7 +89,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Editing profile</h1>
+                    <h1>Редагування профелю</h1>
                     <hr class="small">
                 </div>
             </div>
@@ -97,24 +102,24 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <form:form method="post" modelAttribute="newUser" class="form-signin ">
-        <h2 class="form-signin-heading">Edit profile</h2>
-        <lable id="firstName"><b>First Name: </b></lable>
+        <h2 class="form-signin-heading">Редагування</h2>
+        <lable id="firstName"><b>Ім'я: </b></lable>
         <input name="firstName" id="firstName" type="text" value="${user.firstName}" class="form-control" />
         <div class="invalid-feedback d-block">
             <form:errors path="firstName" />
         </div>
-        <lable id="lastName"><b>Last Name: </b></lable>
+        <lable id="lastName"><b>Прізвище: </b></lable>
         <input name="lastName" id = "lastName" type="text" value="${user.lastName}" class="form-control" />
         <div class="invalid-feedback d-block">
             <form:errors path="lastName" />
         </div>
-        <lable id="age"><b>Age: </b></lable>
+        <lable id="age"><b>Вік: </b></lable>
         <input name="age" id = "age" type="text" value="${user.age}" class="form-control"/>
         <div class="invalid-feedback d-block">
             <form:errors path="age" />
         </div>
         <br>
-        <button class="btn btn-success bg-dark text-success" type="submit">Submit changes</button>
+        <button class="btn btn-success bg-dark text-success" type="submit">Зберегти зміни</button>
     </form:form>
         </div>
     </div>
@@ -152,7 +157,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

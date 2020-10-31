@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
         <meta charset="utf-8">
@@ -10,7 +12,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Login</title>
+        <title>Вхід</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -34,14 +36,14 @@
 <body>
 <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post" class="form-signin">
-        <h2 class="form-heading">Login</h2>
+        <h2 class="form-heading">Вхід</h2>
         <div class="form-group">
             <h3 class="text-left text-danger">${error}</h3>
             <h3 class="text-left text-success">${message}</h3>
-            <input name="email" type="email" class="form-control" placeholder="Your email"/>
-            <input name="password" type="password" class="form-control" placeholder="Your password" />
-            <button class="btn btn-lg btn-success btn-block bg-dark text-success" type="submit">Login</button>
-            <h4 class="text-center"><a href="/registration" class="text-success">Create an account</a></h4>
+            <input name="email" type="email" class="form-control" placeholder="Електронна пошта"/>
+            <input name="password" type="password" class="form-control" placeholder="Пароль" />
+            <button class="btn btn-lg btn-success btn-block bg-dark text-success" type="submit">Увійти</button>
+            <h4 class="text-center"><a href="/registration" class="text-success">Реєстрація</a></h4>
         </div>
     </form>
 </div>

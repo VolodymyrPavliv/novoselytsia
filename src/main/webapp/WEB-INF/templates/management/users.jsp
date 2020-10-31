@@ -1,6 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
 
@@ -10,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Management users</title>
+    <title>Менеджмент</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -43,34 +45,37 @@
                 <span class="sr-only">Toggle navigation</span>
                 Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand" href="<c:url value="/"/>">Novoselytsia</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Новоселиця</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="<c:url value="/"/>">Home</a>
+                    <a href="<c:url value="/"/>">Головна</a>
                 </li>
                 <c:if test="${pageContext.request.isUserInRole('MANAGER')}">
-                <li>
-                    <a href="<c:url value="/management"/>">Management</a>
-                </li>
+                    <li>
+                        <a href="<c:url value="/management"/>">Менеджмент</a>
+                    </li>
                 </c:if>
                 <li>
-                    <a href="<c:url value="/news"/>">News</a>
+                    <a href="<c:url value="/news"/>">Новини</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/places"/>">Places</a>
+                    <a href="<c:url value="/places"/>">Місця</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/history"/>">History</a>
+                    <a href="<c:url value="/history"/>">Історія</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/profile"/>">Profile</a>
+                    <a href="<c:url value="/profile"/>">Профіль</a>
                 </li>
                 <li>
-                    <a href="<c:url value="/logout"/>">Logout</a>
+                    <a href="<c:url value="/contact"/>">Контакти</a>
+                </li>
+                <li>
+                    <a href="<c:url value="/logout"/>">Вихід</a>
                 </li>
             </ul>
         </div>
@@ -86,7 +91,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Management users</h1>
+                    <h1>Менеджмент користувачів</h1>
                     <hr class="small">
                 </div>
             </div>
@@ -98,15 +103,15 @@
 
 <div class="container">
     <form action=""  method="get" >
-        <input type="text" name="lastName" placeholder="Enter last name"/>
-        <button class="btn btn-success bg-dark text-success" type="submit">Find</button>
+        <input type="text" name="lastName" placeholder="Введі прізвище"/>
+        <button class="btn btn-success bg-dark text-success" type="submit">Знайти</button>
     </form>
 
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <c:choose>
                 <c:when test="${empty users}">
-                    <h4>There are no users</h4>
+                    <h4>Немає користувачів</h4>
                 </c:when>
 
 
@@ -118,18 +123,18 @@
                                     ${user.firstName} ${user.lastName}
                             </h2>
                             <p class="post-meta">${user.email}</p>
-                            <p><b>Age: </b>${user.age}</p>
+                            <p><b>Вік: </b>${user.age}</p>
                             <c:forEach items="${user.roles}" var="role">
-                                <p><b>Role: </b>${role.name}</p>
+                                <p><b>Статус: </b>${role.name}</p>
                             </c:forEach>
                             <form method="post" action="/management/users/${user.id}">
-                                <button class="btn btn-info" type="submit">Change status</button>
+                                <button class="btn btn-info" type="submit">Зберегти зміни</button>
                             </form>
                             <br>
                             <a href="<c:url value="/profile/news/${user.id}"/>"
-                               class="btn btn-info btn-sm bg-info text-white">Posts</a>
+                               class="btn btn-info btn-sm bg-info text-white">Пости</a>
                             <a href="<c:url value="/management/users/delete/${user.id}"/>"
-                               class="btn btn-danger btn-sm">Delete</a>
+                               class="btn btn-danger btn-sm">Видалити</a>
                         </c:forEach>
                 </c:otherwise>
             </c:choose>
@@ -169,7 +174,7 @@
                         </a>
                     </li>
                 </ul>
-                <p class="copyright text-muted">Copyright &copy; Novoselytsia 2020</p>
+                <p class="copyright text-muted">Novoselytsia &copy; 2020</p>
             </div>
         </div>
     </div>

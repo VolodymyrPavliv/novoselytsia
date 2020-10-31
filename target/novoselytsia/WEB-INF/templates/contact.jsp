@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Менеджмент</title>
+    <title>Контакти</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -91,8 +91,9 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Менеджмент користувачів</h1>
+                    <h1>Контакти</h1>
                     <hr class="small">
+                    <span class="subheading">Якщо у вас є питанн, ви можете зв'язатися з нами</span>
                 </div>
             </div>
         </div>
@@ -102,42 +103,8 @@
 <!-- Main Content -->
 
 <div class="container">
-    <form action=""  method="get" >
-        <input type="text" name="lastName" placeholder="Введі прізвище"/>
-        <button class="btn btn-success bg-dark text-success" type="submit">Знайти</button>
-    </form>
-
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <c:choose>
-                <c:when test="${empty users}">
-                    <h4>Немає користувачів</h4>
-                </c:when>
-
-
-                <c:otherwise>
-                    <c:forEach items="${users}" var="user">
-                        <hr>
-                        <div class="post-preview">
-                            <h2 class="post-title">
-                                    ${user.firstName} ${user.lastName}
-                            </h2>
-                            <p class="post-meta">${user.email}</p>
-                            <p><b>Вік: </b>${user.age}</p>
-                            <c:forEach items="${user.roles}" var="role">
-                                <p><b>Статус: </b>${role.name}</p>
-                            </c:forEach>
-                            <form method="post" action="/management/users/${user.id}">
-                                <button class="btn btn-info" type="submit">Зберегти зміни</button>
-                            </form>
-                            <br>
-                            <a href="<c:url value="/profile/news/${user.id}"/>"
-                               class="btn btn-info btn-sm bg-info text-white">Пости</a>
-                            <a href="<c:url value="/management/users/delete/${user.id}"/>"
-                               class="btn btn-danger btn-sm">Видалити</a>
-                        </c:forEach>
-                </c:otherwise>
-            </c:choose>
         </div>
     </div>
 </div>

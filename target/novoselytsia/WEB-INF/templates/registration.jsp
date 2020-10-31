@@ -1,7 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>Регістрація</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,28 +37,28 @@
 <body>
 <div class="container">
     <form:form action="/registration" method="post" modelAttribute="newUser" class="form-signin ">
-        <h2 class="form-signin-heading">Registration</h2>
-        <form:input path="firstName" type="text" class="form-control" placeholder="First Name"/>
+        <h2 class="form-signin-heading">Реєстрація</h2>
+        <form:input path="firstName" type="text" class="form-control" placeholder="Ім'я"/>
         <div class="invalid-feedback d-block">
             <form:errors path="firstName" />
         </div>
-        <form:input path="lastName" type="text" class="form-control" placeholder="Last Name"/>
+        <form:input path="lastName" type="text" class="form-control" placeholder="Прізвище"/>
         <div class="invalid-feedback d-block">
             <form:errors path="lastName" />
         </div>
-        <form:input path="email" type="email" class="form-control" placeholder="Email"/>
+        <form:input path="email" type="email" class="form-control" placeholder="Електронна пошта"/>
         <div class="invalid-feedback d-block">
             <form:errors path="email" />
         </div>
-        <form:input path="age" type="text" class="form-control" placeholder="Username"/>
+        <form:input path="age" type="text" class="form-control" placeholder="Вік"/>
         <div class="invalid-feedback d-block">
             <form:errors path="age" />
         </div>
-        <form:input path="password" type="password" class="form-control" placeholder="Password" />
+        <form:input path="password" type="password" class="form-control" placeholder="Пароль" />
         <div class="invalid-feedback d-block">
             <form:errors path="password" />
         </div>
-        <button class="btn btn-lg btn-success btn-block bg-dark text-white" type="submit">Register</button>
+        <button class="btn btn-lg btn-success btn-block bg-dark text-white" type="submit">Зареєструватися</button>
     </form:form>
 </div>
 <!-- jQuery -->
