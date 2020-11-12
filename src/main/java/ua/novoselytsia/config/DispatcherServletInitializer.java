@@ -25,13 +25,13 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
     @Override
     protected Filter[] getServletFilters() {
-        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+        HiddenHttpMethodFilter hiddenHttpMethodFilter = new HiddenHttpMethodFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
 
 
-        return new Filter[] {hiddenHttpMethodFilter, characterEncodingFilter};
+        return new Filter[] {characterEncodingFilter, hiddenHttpMethodFilter };
     }
 
 }
