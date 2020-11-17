@@ -39,23 +39,23 @@
     <form:form action="/registration" method="post" modelAttribute="newUser" class="form-signin ">
         <h2 class="form-signin-heading">Реєстрація</h2>
         <form:input path="firstName" type="text" class="form-control" placeholder="Ім'я"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="firstName" />
         </div>
         <form:input path="lastName" type="text" class="form-control" placeholder="Прізвище"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="lastName" />
         </div>
         <form:input path="email" type="email" class="form-control" placeholder="Електронна пошта"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="email" />
         </div>
         <form:input path="age" type="text" class="form-control" placeholder="Вік"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="age" />
         </div>
         <form:input path="password" type="password" class="form-control" placeholder="Пароль" />
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="password" />
         </div>
         <button class="btn btn-lg btn-success btn-block bg-dark text-white" type="submit">Зареєструватися</button>

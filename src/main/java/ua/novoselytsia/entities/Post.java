@@ -23,6 +23,9 @@ public class Post {
     @Column(name = "last_modified")
     private LocalDateTime lastModified;
 
+    @Column(name = "filename")
+    private String filename;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id",
             referencedColumnName = "id",
@@ -86,5 +89,13 @@ public class Post {
 
     public void setLastModified(LocalDateTime lastModified) {
         this.lastModified = lastModified;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

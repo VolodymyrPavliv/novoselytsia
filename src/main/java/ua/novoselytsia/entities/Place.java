@@ -19,6 +19,9 @@ public class Place {
     @Column(name = "location")
     private String location;
 
+    @Column(name = "filename")
+    private String filename;
+
     public Place() {
     }
 
@@ -52,5 +55,13 @@ public class Place {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }

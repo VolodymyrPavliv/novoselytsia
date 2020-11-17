@@ -128,6 +128,9 @@
                             <h2 class="post-title">
                                     ${place.name}
                             </h2>
+                            <c:if test="${place.filename != null}">
+                                <img class = "img-responsive center-block" src="/images/${place.filename}"/>
+                            </c:if>
                             <p class="post-meta">
                                     <b>Локація: </b>${place.location}
                             </p>

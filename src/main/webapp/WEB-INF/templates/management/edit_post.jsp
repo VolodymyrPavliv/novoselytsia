@@ -103,18 +103,26 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <form:form method="post" modelAttribute="newPost">
+    <form:form method="post" modelAttribute="newPost" enctype="multipart/form-data">
         <hidden path="id" />
         <label for="postTitle" class="form-label"><b>Заголовок: </b></label>
         <input name="title" type="text" class="form-control" id="postTitle" value="${post.title}"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="title" />
         </div>
         <label for="postText" class="form-label"><b>Текст: </b></label>
         <textarea name="text"  class="form-control" id="postText" rows="3">${post.text}</textarea>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="text" />
         </div>
+        <c:if test="${post.filename == null}">
+            <lable id="file"><b>Додати зображення: </b></lable>
+        </c:if>
+        <c:if test="${post.filename != null}">
+            <lable id="file"><b>Змінити зображення: </b></lable>
+        </c:if>
+        <input type="file" name="file" class="form-control"/>
+        <h5 class="text-left text-danger">${fileError}</h5>
         <br>
         <button class="btn btn-success bg-dark text-success" type="submit">Зберегти зміни</button>
     </form:form>

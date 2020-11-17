@@ -122,13 +122,17 @@
                             <h2 class="post-title">
                                     ${user.firstName} ${user.lastName}
                             </h2>
-                            <p class="post-meta">${user.email}</p>
+                            <c:if test="${user.filename != null}">
+                                <img class = "img-responsive center-block" src="/images/${user.filename}" width="300" height="350"/>
+                            </c:if>
+                            <br>
+                            <p><b>Email: </b>${user.email}</p>
                             <p><b>Вік: </b>${user.age}</p>
                             <c:forEach items="${user.roles}" var="role">
                                 <p><b>Статус: </b>${role.name}</p>
                             </c:forEach>
                             <form method="post" action="/management/users/${user.id}">
-                                <button class="btn btn-info" type="submit">Зберегти зміни</button>
+                                <button class="btn btn-info" type="submit">Змінити статус</button>
                             </form>
                             <br>
                             <a href="<c:url value="/profile/news/${user.id}"/>"

@@ -101,24 +101,32 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <form:form method="post" modelAttribute="newUser" class="form-signin ">
+            <form:form method="post" modelAttribute="newUser" class="form-signin " enctype="multipart/form-data">
         <h2 class="form-signin-heading">Редагування</h2>
-        <lable id="firstName"><b>Ім'я: </b></lable>
+        <lable for="firstName"><b>Ім'я: </b></lable>
         <input name="firstName" id="firstName" type="text" value="${user.firstName}" class="form-control" />
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="firstName" />
         </div>
-        <lable id="lastName"><b>Прізвище: </b></lable>
+        <lable for="lastName"><b>Прізвище: </b></lable>
         <input name="lastName" id = "lastName" type="text" value="${user.lastName}" class="form-control" />
         <div class="invalid-feedback d-block">
             <form:errors path="lastName" />
         </div>
-        <lable id="age"><b>Вік: </b></lable>
+        <lable for="age"><b>Вік: </b></lable>
         <input name="age" id = "age" type="text" value="${user.age}" class="form-control"/>
-        <div class="invalid-feedback d-block">
+                <div class="invalid-feedback d-block">
             <form:errors path="age" />
         </div>
-        <br>
+                <c:if test="${user.filename == null}">
+                    <lable id="file"><b>Додати фото: </b></lable>
+                </c:if>
+                <c:if test="${user.filename != null}">
+                    <lable id="file"><b>Змінити фото: </b></lable>
+                </c:if>
+                <input type="file" name="file" class="form-control"/>
+                <h5 class="text-left text-danger">${fileError}</h5>
+                <br>
         <button class="btn btn-success bg-dark text-success" type="submit">Зберегти зміни</button>
     </form:form>
         </div>

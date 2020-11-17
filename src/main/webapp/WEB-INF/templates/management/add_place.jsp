@@ -100,10 +100,10 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <form:form action="/management/places/add" method="post" modelAttribute="newPlace">
+    <form:form action="/management/places/add" method="post" modelAttribute="newPlace" enctype="multipart/form-data">
         <label for="placeName" class="form-label"><b>Назва: </b></label>
         <form:input path="name" class="form-control" id = "placeName" placeholder="Введіть заголовок"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="name" />
         </div>
 
@@ -113,6 +113,9 @@
         <label for="placeLocation" class="form-label"><b>Локація: </b></label>
         <form:input path="location"  class="form-control" id = "placeLocation" placeholder="Введіть локацію"/>
         <br>
+        <lable id="file"><b>Додати зображення: </b></lable>
+        <input type="file" name="file" class="form-control"/>
+        <h5 class="text-left text-danger">${fileError}</h5>
         <button class="btn btn-success bg-dark text-success" type="submit">Додати місце</button>
     </form:form>
 </div>

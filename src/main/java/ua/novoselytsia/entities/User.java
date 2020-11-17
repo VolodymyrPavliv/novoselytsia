@@ -27,6 +27,9 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "filename")
+    private String filename;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",
@@ -128,6 +131,14 @@ public class User {
 
     public String getName() {
         return firstName +" "+ lastName;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 
     @Override

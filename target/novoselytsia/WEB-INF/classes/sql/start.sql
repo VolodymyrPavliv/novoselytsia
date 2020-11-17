@@ -4,7 +4,8 @@ create table if not exists `users` (
   `first_name` varchar(200) not null,
   `last_name` varchar(200) not null,
   `age` int not null,
-  `password` varchar(200) not null
+  `password` varchar(200) not null,
+  `filename` varchar(100)
 );
 
 create table if not exists `roles` (
@@ -31,6 +32,8 @@ create table if not exists `news` (
   `text` varchar(550) not null,
   `publication_date` datetime not null,
   `last_modified` datetime,
+  `filename` varchar(100),
+
   foreign key (user_id)
     references users(`id`)
         on update restrict on delete cascade
@@ -40,5 +43,6 @@ create table if not exists `places` (
     `id` int primary key auto_increment,
     `name` varchar(100) not null,
     `description` varchar(550),
-    `location` varchar(100)
+    `location` varchar(100),
+    `filename` varchar(100)
 );

@@ -127,6 +127,9 @@
                             <h2 class="post-title">
                                     ${post.title}
                             </h2>
+                            <c:if test="${post.filename != null}">
+                                <img class="img-responsive center-block" src="/images/${post.filename}"/>
+                            </c:if>
                             <p>
                                     ${post.text}
                             </p>

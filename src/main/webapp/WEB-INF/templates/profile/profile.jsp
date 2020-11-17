@@ -106,7 +106,11 @@
                 <h2 class="post-title">
                     ${userName}
                 </h2>
-                <p class="post-meta">${user.email}</p>
+                <c:if test="${user.filename != null}">
+                    <img class = "img-responsive center-block" src="/images/${user.filename}" width="300" height="350"/>
+                </c:if>
+                <br>
+                <p><b>Email: </b>${user.email}</p>
                 <p><b>Вік: </b>${user.age}</p>
                 <c:forEach items="${user.roles}" var="role">
                     <p><b>Статус: </b>${role.name}</p>

@@ -1,10 +1,14 @@
 package ua.novoselytsia.controller;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ua.novoselytsia.entities.Post;
 import ua.novoselytsia.entities.User;
 import ua.novoselytsia.security.CustomerDetails;
@@ -13,21 +17,31 @@ import ua.novoselytsia.service.UserService;
 import ua.novoselytsia.validation.PostValidator;
 import ua.novoselytsia.validation.UserValidator;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 @Controller
 @RequestMapping("/profile")
+@PropertySource({"classpath:path.properties"})
 public class ProfileController {
     private final UserService userService;
     private final PostService postService;
     private final PostValidator postValidator;
     private final UserValidator userValidator;
+    private final Environment env;
 
-    public ProfileController(UserService userService, PostService postService, PostValidator postValidator, UserValidator userValidator) {
+    private final int MAX_SIZE = 200000;
+
+    @Value("${upload.path}")
+    private String upload;
+
+    public ProfileController(UserService userService, PostService postService, PostValidator postValidator, UserValidator userValidator, Environment env) {
         this.userService = userService;
         this.postService = postService;
         this.postValidator = postValidator;
         this.userValidator = userValidator;
+        this.env = env;
     }
 
     @GetMapping
@@ -49,7 +63,7 @@ public class ProfileController {
 
     @PostMapping("/edit/{id}")
     public String profileEdit(@ModelAttribute("newUser") User newUser, Errors errors, @PathVariable Long id,
-                              Model model) {
+                              Model model, @RequestParam("file") MultipartFile file) throws IOException {
         User user = userService.getById(id);
 
         user.setFirstName(newUser.getFirstName());
@@ -61,6 +75,18 @@ public class ProfileController {
             model.addAttribute("user", user);
             return "profile/edit_profile";
         }
+
+        if(file.getSize() > MAX_SIZE) {
+            model.addAttribute("user", user);
+            model.addAttribute("fileError", env.getProperty("error.file"));
+            return "profile/edit_profile";
+        }
+
+        if(file.getSize()>0) {
+            file.transferTo(new File(upload + file.getOriginalFilename()));
+            user.setFilename(file.getOriginalFilename());
+        }
+
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             CustomerDetails customerDetails = (CustomerDetails) principal;
             User currentUser = userService.getById(customerDetails.getUserId());
@@ -106,7 +132,9 @@ public class ProfileController {
 
     @PostMapping("/news/edit/{id}")
     public String editPost(@ModelAttribute("newPost") Post newPost, Errors errors,
-                           Model model, @PathVariable Long id) {
+                           Model model, @PathVariable Long id,
+                           @RequestParam("file") MultipartFile file) throws IOException {
+
         Post post = postService.getById(id);
         post.setTitle(newPost.getTitle());
         post.setText(newPost.getText());
@@ -115,6 +143,17 @@ public class ProfileController {
         if(errors.hasErrors()) {
             model.addAttribute("post",post);
             return "management/edit_post";
+        }
+
+        if(file.getSize()>MAX_SIZE) {
+            model.addAttribute("post",post);
+            model.addAttribute("fileError", env.getProperty("error.file"));
+            return "management/edit_post";
+        }
+
+        if(file.getSize()>0) {
+            file.transferTo(new File(upload + file.getOriginalFilename()));
+            post.setFilename(file.getOriginalFilename());
         }
 
         post.setLastModified(LocalDateTime.now());

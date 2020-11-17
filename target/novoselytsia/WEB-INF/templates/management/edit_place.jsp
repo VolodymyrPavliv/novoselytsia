@@ -102,11 +102,11 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-    <form:form method="post" modelAttribute="place">
+    <form:form method="post" modelAttribute="place" enctype="multipart/form-data">
         <hidden path="id" />
         <label for="placeName" class="form-label"><b>Назва:</b></label>
         <input name="name" type="text" class="form-control" id="placeName" value="${place.name}"/>
-        <div class="invalid-feedback d-block">
+        <div class="text-left text-danger">
             <form:errors path="name" />
         </div>
         <label for="placeDescription" class="form-label"><b>Опис</b></label>
@@ -114,6 +114,14 @@
         <label for="placeLocation" class="form-label"><b>Локація:</b></label>
         <input name="location" type="text" class="form-control" id="placeLocation" value="${place.location}"/>
         <br>
+        <c:if test="${place.filename == null}">
+            <lable id="file"><b>Додати зображення: </b></lable>
+        </c:if>
+        <c:if test="${place.filename != null}">
+            <lable id="file"><b>Змінити зображення: </b></lable>
+        </c:if>
+        <input type="file" name="file" class="form-control"/>
+        <h5 class="text-left text-danger">${fileError}</h5>
         <button class="btn btn-success bg-dark text-success" type="submit">Зберегти зміни</button>
     </form:form>
 </div>
